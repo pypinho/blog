@@ -16,6 +16,8 @@ index.html              page d'accueil, liste des articles
 2. Ajouter un `<li>` en tête de la liste `.posts` dans `index.html` (date, titre, une phrase).
 3. Commit + push sur `main`. Le site est à jour une minute plus tard.
 
+Marche depuis Claude Code sur le PC (WSL) comme depuis une session cloud (GitHub relié au compte Claude perso).
+
 Slugs en minuscules, sans accents, mots séparés par des tirets.
 
 ## Articles
