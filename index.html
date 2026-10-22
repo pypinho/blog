@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le blog de Pypinho</title>
+<meta name="description" content="Des idées complexes, expliquées simplement, avec des dessins.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{--paper:#fdfdfb;--ink:#1e2026;--muted:#5f636d;--rule:#e4e2dc;--hl:#fff09a;
+  --hand:"Patrick Hand","Comic Neue","Segoe Print",cursive;--body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif}
+@media (prefers-color-scheme: dark){:root{--paper:#16181d;--ink:#e9e7e2;--muted:#a4a8b1;--rule:#2d3038;--hl:#5a4d10;color-scheme:dark}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6}
+.wrap{max-width:720px;margin:0 auto;padding-block:48px 80px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:28px}
+h1{font-family:var(--hand);font-weight:400;font-size:clamp(42px,9vw,64px);line-height:1.05;margin:0}
+.lede{color:var(--muted);margin:0;max-width:52ch}
+mark{background:var(--hl);color:inherit;padding:0 3px}
+.posts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.posts li{border-top:2px dashed var(--rule);padding-block:22px}
+.posts a{color:inherit;text-decoration:none;display:flex;flex-direction:column;gap:6px}
+.posts h2{font-family:var(--hand);font-weight:400;font-size:clamp(26px,5vw,32px);line-height:1.15;margin:0;text-wrap:balance}
+.posts a:hover h2,.posts a:focus-visible h2{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.posts a:focus-visible{outline:2px solid var(--ink);outline-offset:6px}
+.meta{font-size:15px;color:var(--muted)}
+.posts p{margin:0}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <h1>Le blog de Pypinho</h1>
+    <p class="lede">Prendre du recul pour comprendre comment le monde fonctionne. Des idées complexes, <mark>expliquées simplement</mark>, avec des dessins.</p>
+  </header>
+  <ul class="posts">
+    <!-- Nouvel article : ajouter un <li> en haut de cette liste -->
+    <li>
+      <a href="/echelle-nate/">
+        <span class="meta">22 octobre 2026 · d'après Nate Hagens</span>
+        <h2>Pourquoi on fonce dans le mur alors que tout le monde le sait</h2>
+        <p>Les sept barreaux d'un système emballé, du gallon d'essence au cerveau de Sapiens.</p>
+      </a>
+    </li>
+  </ul>
+</main>
+</body>
+</html>

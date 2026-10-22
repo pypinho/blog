@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="L'épisode de Nate Hagens sur les sept barreaux d'un système emballé, expliqué en français avec des dessins façon Wait But Why.">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>L'échelle de Nate Hagens</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: une colonne de lecture façon blog Wait But Why — texte court, dessin, texte court, dessin. */
+:root{
+  --paper:#fdfdfb; --ink:#1e2026; --muted:#5f636d; --rule:#e4e2dc;
+  --hl:#fff09a; --red:#d4432c; --blue:#2c6bd3; --green:#2a9a5f; --soft:#f3f2ee;
+  --hand:"Patrick Hand","Comic Neue","Segoe Print",cursive;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#16181d; --ink:#e9e7e2; --muted:#a4a8b1; --rule:#2d3038;
+  --hl:#5a4d10; --red:#ff7b63; --blue:#7ea9ff; --green:#6fd39b; --soft:#1f2228; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#16181d; --ink:#e9e7e2; --muted:#a4a8b1; --rule:#2d3038;
+  --hl:#5a4d10; --red:#ff7b63; --blue:#7ea9ff; --green:#6fd39b; --soft:#1f2228; color-scheme:dark}
+
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.65}
+.wrap{max-width:720px;margin:0 auto;padding-block:40px 80px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--hand);font-weight:400;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(40px,8vw,60px)}
+h2{font-size:clamp(30px,5.5vw,40px);margin-top:64px}
+h3{font-size:26px}
+p{margin:0}
+.flow{display:flex;flex-direction:column;gap:18px}
+.kicker{font-family:var(--hand);font-size:20px;color:var(--muted)}
+mark{background:var(--hl);color:inherit;padding:0 3px;border-radius:2px}
+.hand{font-family:var(--hand);font-size:1.15em}
+a{color:var(--blue)}
+figure{margin:8px 0;display:flex;flex-direction:column;gap:6px;align-items:center}
+figure svg{width:100%;height:auto;max-width:100%;overflow:visible}
+figcaption{font-family:var(--hand);font-size:19px;color:var(--muted);text-align:center;max-width:52ch}
+.s{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.sf{fill:var(--paper);stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
+.thin{stroke-width:1.6}
+.dash{stroke-dasharray:6 6}
+.t{fill:var(--ink);font-family:var(--hand);font-size:18px}
+.tm{fill:var(--muted);font-family:var(--hand);font-size:16px}
+.tr{fill:var(--red)} .tg{fill:var(--green)} .tb{fill:var(--blue)}
+.sr{stroke:var(--red)} .sg{stroke:var(--green)} .sb{stroke:var(--blue)}
+.fh{fill:var(--hl)}
+.guy{color:var(--ink)} .guy-r{color:var(--red)} .guy-b{color:var(--blue)} .guy-m{color:var(--muted)}
+.rough{filter:url(#rough)}
+
+.rung-head{display:flex;align-items:baseline;gap:14px;margin-top:64px}
+.rung-num{font-family:var(--hand);font-size:22px;width:44px;height:44px;flex:none;display:grid;place-items:center;
+  border:2.5px solid var(--ink);border-radius:50%;transform:rotate(-4deg)}
+.rung-head h2{margin:0}
+.gas{background:var(--soft);border-left:4px solid var(--red);padding:14px 18px;border-radius:0 6px 6px 0}
+.gas b{font-family:var(--hand);font-weight:400;font-size:21px;color:var(--red);display:block;margin-bottom:2px}
+.aside{border:2px dashed var(--rule);padding:16px 18px;border-radius:8px}
+.aside b{font-family:var(--hand);font-weight:400;font-size:21px;display:block;margin-bottom:4px}
+.big{font-family:var(--hand);font-size:clamp(26px,5vw,34px);line-height:1.25;text-align:center;padding:12px 0}
+.ladder-nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.ladder-nav a{font-family:var(--hand);font-size:18px;text-decoration:none;color:var(--ink);border:1.5px solid var(--rule);
+  padding:2px 12px;border-radius:999px}
+.ladder-nav a:hover,.ladder-nav a:focus-visible{border-color:var(--ink);outline:none}
+.map{display:grid;grid-template-columns:auto 1fr;gap:10px 16px;align-items:baseline}
+.map dt{font-family:var(--hand);font-size:20px}
+.map dd{margin:0;min-width:0}
+.sources{font-size:15px;color:var(--muted)}
+.refs{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:10px;font-size:16.5px;line-height:1.55}
+.refs li{min-width:0;overflow-wrap:anywhere}
+.flow h3{margin-top:10px}
+.aside{margin-top:12px}
+hr{border:0;border-top:2px dashed var(--rule);margin:56px 0 0}
+</style>
+</head>
+<body>
+<p class="back" style="max-width:720px;margin:0 auto;padding:16px max(16px,env(safe-area-inset-left,0px)) 0;font-family:'Patrick Hand',cursive;font-size:19px"><a href="/" style="color:inherit">← blog.pypinho.fr</a></p>
+
+
+<!-- Définitions partagées : effet "trait à la main" et bonshommes -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7"/>
+      <feDisplacementMap in="SourceGraphic" scale="2.6"/>
+    </filter>
+    <symbol id="guy" viewBox="0 0 40 72">
+      <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="20" cy="12" r="10"/><path d="M20 22V48M20 30L8 42M20 30L32 42M20 48L10 70M20 48L30 70"/>
+      </g>
+    </symbol>
+    <symbol id="guyup" viewBox="0 0 40 72">
+      <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="20" cy="12" r="10"/><path d="M20 22V48M20 30L6 18M20 30L34 18M20 48L10 70M20 48L30 70"/>
+      </g>
+    </symbol>
+    <symbol id="guypullL" viewBox="0 0 40 72">
+      <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="24" cy="14" r="10"/><path d="M22 24L18 48M20 32L4 36M20 32L2 30M18 48L30 70M18 48L8 70"/>
+      </g>
+    </symbol>
+    <symbol id="guypull" viewBox="0 0 40 72">
+      <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="16" cy="14" r="10"/><path d="M18 24L22 48M20 32L36 36M20 32L38 30M22 48L10 70M22 48L32 70"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<main class="wrap">
+<div class="flow">
+  <p class="kicker">D'après « 7 Rungs of a Runaway System », Nate Hagens, The Great Simplification, Frankly #162</p>
+  <h1>Pourquoi on fonce dans le mur alors que tout le monde le sait</h1>
+  <p>Depuis 50 ans, la science sur l'énergie et l'écologie n'arrête pas de s'améliorer. Pendant ce temps, les émissions ont plus que doublé et la consommation de matières a triplé.</p>
+  <p>Donc le problème, ce n'est pas qu'on manque d'information.</p>
+</div>
+
+<figure>
+  <svg viewBox="0 0 640 260" role="img" aria-label="Un scientifique crie des graphiques à une foule qui regarde ses téléphones">
+    <g class="rough">
+      <use href="#guyup" class="guy-b" x="40" y="120" width="56" height="100"/>
+      <rect class="sf" x="20" y="80" width="96" height="44" rx="4"/>
+      <path class="s sr" d="M30 115L50 104L64 108L82 92L104 86"/>
+      <path class="s" d="M0 222H640"/>
+      <!-- foule -->
+      <g>
+        <use href="#guy" class="guy" x="360" y="140" width="44" height="80"/>
+        <use href="#guy" class="guy" x="410" y="134" width="46" height="86"/>
+        <use href="#guy" class="guy" x="462" y="142" width="42" height="78"/>
+        <use href="#guy" class="guy" x="510" y="136" width="44" height="84"/>
+        <use href="#guy" class="guy" x="560" y="140" width="44" height="80"/>
+        <rect class="sf thin" x="370" y="168" width="10" height="14" rx="2"/>
+        <rect class="sf thin" x="421" y="164" width="10" height="14" rx="2"/>
+        <rect class="sf thin" x="471" y="170" width="10" height="14" rx="2"/>
+        <rect class="sf thin" x="521" y="166" width="10" height="14" rx="2"/>
+        <rect class="sf thin" x="570" y="168" width="10" height="14" rx="2"/>
+      </g>
+      <path class="sf" d="M130 40H330Q342 40 342 52V92Q342 104 330 104H180L150 124L158 104H130Q118 104 118 92V52Q118 40 130 40Z"/>
+    </g>
+    <text class="t" x="230" y="68" text-anchor="middle">PLUS DE DONNÉES !!</text>
+    <text class="t" x="230" y="92" text-anchor="middle">PLUS DE GRAPHIQUES !!</text>
+    <text class="tm" x="480" y="112" text-anchor="middle">« ah ouais ? cool »</text>
+  </svg>
+  <figcaption>Le « modèle du déficit d'information » : il suffirait de mieux informer les gens. Nate le dit tout net, c'est faux, ou au mieux insuffisant.</figcaption>
+</figure>
+
+<div class="flow">
+  <p>Alors comment ça marche, vraiment ? Nate propose une <mark>échelle</mark>. Chaque barreau façonne celui d'en dessous. Tout en bas, il y a ce qu'on voit tous les jours : les infos, les élections, nos choix. Et plus on monte, plus on touche aux causes profondes.</p>
+</div>
+
+<figure>
+  <svg viewBox="0 0 640 600" role="img" aria-label="Une échelle de six barreaux avec un nuage mystère au-dessus, une flèche levier vers le haut et une flèche vitesse vers le bas, et un bonhomme pendu par des ficelles au barreau du bas">
+    <g class="rough">
+      <!-- nuage mystère -->
+      <path class="s dash" d="M220 70Q205 40 240 34Q258 10 292 22Q320 4 352 22Q388 12 400 36Q432 40 420 66Q410 86 380 80Q350 96 320 82Q288 96 262 82Q228 92 220 70Z"/>
+      <!-- montants -->
+      <path class="s" d="M180 100L176 556M460 100L464 556"/>
+      <!-- barreaux -->
+      <path class="s" d="M178 120H462M178 190H462M178 260H462M177 330H463M177 400H463M177 470H463"/>
+      <path class="s" d="M0 556H640"/>
+      <!-- flèche levier -->
+      <path class="s sg" style="stroke-width:4" d="M110 470V128M96 146L110 124L124 146"/>
+      <!-- flèche vitesse -->
+      <path class="s sr" style="stroke-width:4" d="M530 120V462M516 444L530 466L544 444"/>
+      <!-- bonhomme marionnette -->
+      <use href="#guyup" class="guy-b" x="294" y="484" width="40" height="72"/>
+      <path class="s thin dash" d="M300 502V472M328 502V472"/>
+      <path class="sf" d="M370 486H600Q612 486 612 498V524Q612 536 600 536H392L372 550L376 536H370Q358 536 358 524V498Q358 486 370 486Z"/>
+    </g>
+    <text class="tm" x="320" y="58" text-anchor="middle">??? (on y revient)</text>
+    <text class="t" x="320" y="112" text-anchor="middle">1 · Vision du monde</text>
+    <text class="t" x="320" y="182" text-anchor="middle">2 · Valeurs &amp; signaux de statut</text>
+    <text class="t" x="320" y="252" text-anchor="middle">3 · Règles &amp; institutions</text>
+    <text class="t" x="320" y="322" text-anchor="middle">4 · Incitations</text>
+    <text class="t" x="320" y="392" text-anchor="middle">5 · Information</text>
+    <text class="t" x="320" y="462" text-anchor="middle">6 · Événements &amp; comportements</text>
+    <text class="t tg" x="96" y="300" text-anchor="middle" transform="rotate(-90 96 300)">plus de levier pour changer</text>
+    <text class="t tr" x="552" y="290" text-anchor="middle" transform="rotate(90 552 290)">change plus vite</text>
+    <text class="t" x="485" y="517" text-anchor="middle">C'est moi qui décide !</text>
+  </svg>
+  <figcaption>On croit décider en bas. Mais les ficelles partent d'en haut.</figcaption>
+</figure>
+
+<div class="flow">
+  <p>Pour que ça ne reste pas abstrait, Nate suit un objet très banal à travers chaque barreau : <mark>un gallon d'essence</mark> (environ 3,8 litres). On fait pareil.</p>
+  <nav class="ladder-nav" aria-label="Aller à un barreau">
+    <a href="#r1">1 · Vision du monde</a><a href="#r2">2 · Statut</a><a href="#r3">3 · Règles</a>
+    <a href="#r4">4 · Incitations</a><a href="#r5">5 · Information</a><a href="#r6">6 · Événements</a><a href="#r7">7 · ???</a>
+  </nav>
+</div>
+
+<!-- ===== 1 ===== -->
+<div class="rung-head" id="r1"><span class="rung-num">1</span><h2>Vision du monde</h2></div>
+<div class="flow" style="margin-top:18px">
+  <p>Ce sont les histoires qui génèrent tout le reste. On y croit si fort qu'elles ne ressemblent même plus à des histoires : l'humain est séparé de la nature et au-dessus d'elle. Plus, c'est mieux. La croissance, c'est l'état normal du monde.</p>
+  <p>Ici vit ce que Nate appelle la <mark>cécité énergétique</mark> : on traite l'énergie comme une marchandise parmi d'autres, une ligne du budget. Alors que c'est elle qui rend possibles toutes les autres lignes.</p>
+  <p>Une vision du monde est invisible pour ceux qui la portent. La vision collective est héritée de la majorité de la génération d'avant, et elle ne bouge vite qu'avec un choc énorme, une guerre mondiale ou une grande dépression.</p>
+</div>
+<figure>
+  <svg viewBox="0 0 640 280" role="img" aria-label="Un bidon d'essence et une bouteille de lait affichent le même prix, mais le bidon contient cinq semaines de travail humain">
+    <g class="rough">
+      <!-- bidon essence -->
+      <path class="sf" d="M70 90H170V220H70Z"/><path class="s" d="M150 90V70H130V90M84 110L156 200"/>
+      <!-- lait -->
+      <path class="sf" d="M290 110L310 80H350L370 110V220H290Z"/><path class="s" d="M310 80V66H350V80"/>
+      <!-- étiquettes -->
+      <path class="sf" d="M150 132H210L222 146L210 160H150Z"/><path class="sf" d="M350 140H410L422 154L410 168H350Z"/>
+      <path class="s" d="M0 222H640"/>
+      <!-- bulle 5 semaines -->
+      <path class="s dash" d="M440 40H620V200H440Z"/>
+      <path class="s dash" d="M180 160Q300 250 440 180"/>
+      <use href="#guyup" class="guy-r" x="450" y="104" width="34" height="62"/>
+      <use href="#guyup" class="guy-r" x="486" y="104" width="34" height="62"/>
+      <use href="#guyup" class="guy-r" x="522" y="104" width="34" height="62"/>
+      <use href="#guyup" class="guy-r" x="558" y="104" width="34" height="62"/>
+      <path class="s thin sb" d="M462 100l-3 6M500 98l-3 6M534 100l-3 6M572 98l-3 6"/>
+    </g>
+    <text class="t" x="120" y="246" text-anchor="middle">essence</text>
+    <text class="t" x="330" y="246" text-anchor="middle">lait</text>
+    <text class="t" x="182" y="151" text-anchor="middle">prix X</text>
+    <text class="t" x="382" y="159" text-anchor="middle">prix X</text>
+    <text class="t" x="530" y="70" text-anchor="middle">ce qu'il y a vraiment</text>
+    <text class="t" x="530" y="92" text-anchor="middle">dedans :</text>
+    <text class="t tr" x="530" y="188" text-anchor="middle">5 semaines de travail dur</text>
+  </svg>
+  <figcaption>Un gallon d'essence fait à peu près le travail physique d'un humain pendant cinq semaines. On le paie et on le valorise comme un gallon de lait. Toute la cécité énergétique tient dans cette comparaison.</figcaption>
+</figure>
+
+<!-- ===== 2 ===== -->
+<div class="rung-head" id="r2"><span class="rung-num">2</span><h2>Valeurs &amp; signaux de statut</h2></div>
+<div class="flow" style="margin-top:18px">
+  <p>Les humains sont une espèce sociale, et en pratique, <mark>des machines à copier</mark>. On imite ce qu'on voit admiré chez les autres. C'est comme ça que la vision du monde se renforce sans qu'aucun policier n'ait besoin de la faire respecter.</p>
+  <p>Aujourd'hui, le tableau des scores compte la consommation et ce qu'on exhibe : les mètres carrés, les abonnés, les marques, le bateau, les vacances exotiques.</p>
+</div>
+<figure>
+  <svg viewBox="0 0 640 260" role="img" aria-label="Un bonhomme à couronne pose fièrement devant un gros pickup, trois bonshommes l'admirent et le copient">
+    <g class="rough">
+      <!-- pickup -->
+      <path class="sf" d="M150 200V150H210L232 118H290V150H340V200Z"/>
+      <path class="s" d="M238 124H284V150H220Z"/>
+      <circle class="sf" cx="190" cy="204" r="18"/><circle class="sf" cx="300" cy="204" r="18"/>
+      <path class="s dash thin" d="M296 162H336"/>
+      <!-- chef -->
+      <use href="#guyup" class="guy" x="70" y="150" width="40" height="72"/>
+      <path class="s fh" d="M76 150L80 136L88 146L90 132L96 146L104 136L106 150Z" style="fill:var(--hl)"/>
+      <path class="s" d="M0 222H640"/>
+      <!-- copieurs -->
+      <use href="#guy" class="guy-m" x="440" y="150" width="40" height="72"/>
+      <use href="#guy" class="guy-m" x="500" y="150" width="40" height="72"/>
+      <use href="#guy" class="guy-m" x="560" y="150" width="40" height="72"/>
+    </g>
+    <text class="tm" x="316" y="176" text-anchor="middle">(benne vide)</text>
+    <text class="t" x="520" y="130" text-anchor="middle">« ooooh. il m'en faut un. »</text>
+    <text class="t" x="90" y="118" text-anchor="middle">400 ch</text>
+  </svg>
+  <figcaption>Le véhicule le plus vendu aux États-Unis depuis plus de quarante ans : le gros pickup. Beaucoup de bennes ne transportent quasiment jamais rien. Le pickup dit autre chose : capacité, autonomie, appartenance, puissance.</figcaption>
+</figure>
+<div class="flow">
+  <p>Et c'est là que se cache <mark>la nouvelle la plus encourageante de tout l'épisode</mark>. Ces tableaux de scores ont déjà basculé dans l'histoire, et toujours par le même mécanisme : <strong>les élites font défection d'abord, et la société les copie</strong>. Presque personne ne change parce qu'on l'a convaincu. On change parce que ceux qu'on admire ont changé avant.</p>
+</div>
+<div class="gas"><b>Exemples de bascule</b>
+Les pieds bandés en Chine : une pratique millénaire, effondrée en une trentaine d'années parce que des familles d'élite ont formé des ligues et refusé de bander les pieds de leurs filles ou de marier leurs fils à des femmes aux pieds bandés. Pareil pour le duel, la fourrure, et la cigarette, passée de glamour à mal vue en moins d'une génération.</div>
+
+<!-- ===== 3 ===== -->
+<div class="rung-head" id="r3"><span class="rung-num">3</span><h2>Règles &amp; institutions</h2></div>
+<div class="flow" style="margin-top:18px">
+  <p>C'est là que les valeurs deviennent loi : constitutions, droit de propriété, normes comptables, doctrines de sécurité. Une règle, c'est <mark>un jugement de valeur congelé</mark>, qui survit aux gens et aux circonstances qui l'ont figé.</p>
+  <p>Exemple : le devoir fiduciaire. Un gérant de fonds est légalement tenu de maximiser le rendement financier, quoi qu'il pense du monde que vont hériter ses petits-enfants. Il exécute un choix fait il y a des décennies. On fait tourner aujourd'hui des lois écrites quand le superorganisme était encore un enfant.</p>
+  <p>Le gros déclic de Nate vient de deux économistes des années 60, James Buchanan et Gordon Tullock (<em>The Calculus of Consent</em>, 1962) :</p>
+</div>
+<figure>
+  <svg viewBox="0 0 640 250" role="img" aria-label="Le même bonhomme dessiné trois fois : devant une urne, derrière un bureau de l'État, devant une caisse de supermarché">
+    <g class="rough">
+      <use href="#guy" class="guy" x="70" y="120" width="44" height="80"/>
+      <use href="#guy" class="guy" x="298" y="120" width="44" height="80"/>
+      <use href="#guy" class="guy" x="526" y="120" width="44" height="80"/>
+      <!-- urne -->
+      <path class="sf" d="M120 160H170V200H120Z"/><path class="s" d="M134 160H156M140 150L150 140"/>
+      <!-- bureau -->
+      <path class="sf" d="M260 166H380V176H260Z"/><path class="s" d="M268 176V200M372 176V200"/>
+      <!-- caisse -->
+      <path class="sf" d="M470 156H520V200H470Z"/><path class="sf" d="M476 140H514V156H476Z"/>
+      <path class="s" d="M0 202H640"/>
+      <path class="s dash thin" d="M92 92Q320 20 548 92"/>
+    </g>
+    <text class="t" x="96" y="230" text-anchor="middle">à l'urne</text>
+    <text class="t" x="320" y="230" text-anchor="middle">au bureau de l'État</text>
+    <text class="t" x="548" y="230" text-anchor="middle">à la caisse</text>
+    <text class="t tr" x="320" y="60" text-anchor="middle">la même créature</text>
+  </svg>
+  <figcaption>Personne ne se fait pousser une auréole en entrant dans un bureau public.</figcaption>
+</figure>
+<div class="flow">
+  <p>Conséquence : quand le marché échoue, on dit « l'État doit intervenir ». Mais l'État est fait des mêmes gens, soumis aux mêmes pressions. Il échoue aussi, de façon prévisible. <mark>Personne ne se tient au-dessus du système</mark> avec pour mission de le réparer.</p>
+  <p>D'où l'idée qui a valu le Nobel à Buchanan : pour un changement durable, il faut <strong>changer les règles du jeu</strong>, pas juste remplacer les joueurs. Les nouveaux joueurs héritent des vieilles règles.</p>
+</div>
+<div class="gas"><b>Le gallon d'essence ici</b>
+L'Interstate Highway Act de 1956, avec ses dizaines de milliers de kilomètres d'autoroutes, et les règles d'urbanisme qui ont éloigné les maisons des bureaux. Un code fiscal qui favorise le forage depuis environ un siècle. Une taxe fédérale sur l'essence gelée à 18 cents depuis 1993. Le fait que l'essence soit bon marché et indispensable a été voté avant la naissance de ceux qui conduisent aujourd'hui.</div>
+
+<!-- ===== 4 ===== -->
+<div class="rung-head" id="r4"><span class="rung-num">4</span><h2>Incitations</h2></div>
+<div class="flow" style="margin-top:18px">
+  <p>Les règles créent des <mark>pentes</mark> : prix, subventions, résultats trimestriels, plans de carrière, cycles électoraux. Elles décident quelles stratégies permettent de survivre et de prospérer. Changez les règles, et les pentes changent. Trois choses font l'essentiel des dégâts.</p>
+  <h3>a. Qui se présente</h3>
+  <p>Un petit groupe avec des millions en jeu par membre s'organisera toujours mieux qu'une foule immense avec 10 dollars en jeu par personne. S'organiser coûte cher, et seul le camp concentré peut se le permettre.</p>
+</div>
+<figure>
+  <svg viewBox="0 0 640 250" role="img" aria-label="Tir à la corde : trois bonshommes avec des sacs d'argent tirent seuls, en face une grande foule ne tient même pas la corde">
+    <g class="rough">
+      <use href="#guypull" class="guy-r" x="40" y="120" width="44" height="80"/>
+      <use href="#guypull" class="guy-r" x="90" y="120" width="44" height="80"/>
+      <use href="#guypull" class="guy-r" x="140" y="120" width="44" height="80"/>
+      <path class="s" d="M60 152Q260 160 330 156"/>
+      <path class="s dash thin" d="M330 156L380 168"/>
+      <path class="s" d="M0 202H640"/>
+      <!-- foule -->
+      <g>
+        <use href="#guy" class="guy-m" x="400" y="160" width="22" height="40"/><use href="#guy" class="guy-m" x="424" y="164" width="22" height="40"/>
+        <use href="#guy" class="guy-m" x="448" y="158" width="22" height="40"/><use href="#guy" class="guy-m" x="472" y="162" width="22" height="40"/>
+        <use href="#guy" class="guy-m" x="496" y="160" width="22" height="40"/><use href="#guy" class="guy-m" x="520" y="163" width="22" height="40"/>
+        <use href="#guy" class="guy-m" x="544" y="159" width="22" height="40"/><use href="#guy" class="guy-m" x="568" y="162" width="22" height="40"/>
+        <use href="#guy" class="guy-m" x="592" y="160" width="22" height="40"/>
+        <use href="#guy" class="guy-m" x="412" y="124" width="22" height="40"/><use href="#guy" class="guy-m" x="436" y="120" width="22" height="40"/>
+        <use href="#guy" class="guy-m" x="460" y="126" width="22" height="40"/><use href="#guy" class="guy-m" x="484" y="121" width="22" height="40"/>
+        <use href="#guy" class="guy-m" x="508" y="125" width="22" height="40"/><use href="#guy" class="guy-m" x="532" y="120" width="22" height="40"/>
+        <use href="#guy" class="guy-m" x="556" y="124" width="22" height="40"/><use href="#guy" class="guy-m" x="580" y="121" width="22" height="40"/>
+      </g>
+    </g>
+    <text class="t tr" x="110" y="104" text-anchor="middle">des millions chacun</text>
+    <text class="t" x="506" y="104" text-anchor="middle">10 $ chacun</text>
+    <text class="tm" x="506" y="232" text-anchor="middle">(ni les orangs-outans, ni les enfants pas encore nés)</text>
+  </svg>
+  <figcaption>Les bénéfices de brûler vite la « lumière solaire ancienne » sont concentrés et font du lobbying. Les coûts tombent sur les pauvres, les autres espèces et les générations futures, qui ne votent pas et ne financent aucune campagne.</figcaption>
+</figure>
+<div class="flow">
+  <h3>b. Où vont les talents</h3>
+  <p>Passé un certain point, plus d'argent et de cerveaux servent à <mark>se battre pour le gâteau</mark> qu'à le faire grossir. Tullock appelait ça la recherche de rente. Pour Nate, à mesure que l'énergie nette par habitant plafonne, cette part va augmenter, et c'est déjà visible.</p>
+  <h3>c. L'horloge</h3>
+  <p>Un mandat électoral dure 2 à 6 ans. Les processus écologiques qui comptent durent bien plus longtemps. Un élu qui plante des arbres qui feront de l'ombre au mandat suivant commet un suicide politique.</p>
+</div>
+<div class="gas"><b>Le gallon d'essence ici</b>
+Tout élu qui laisse monter le prix à la pompe perd. Point. C'est pour ça que les réserves stratégiques de pétrole sont ouvertes au rythme des élections plutôt qu'au rythme des urgences.</div>
+<p class="big" style="margin-top:28px">Personne n'a besoin d'être méchant.<br>Chacun qui répond <mark>rationnellement</mark> à sa pente locale suffit à verrouiller le résultat collectif.</p>
+
+<!-- ===== 5 ===== -->
+<div class="rung-head" id="r5"><span class="rung-num">5</span><h2>Information</h2></div>
+<div class="flow" style="margin-top:18px">
+  <p>Ce qui est mesuré est géré. Ce qui n'est pas mesuré n'existe pas pour le système. Le PIB et la bourse sont annoncés tous les soirs partout. Les limites planétaires n'ont jamais fait l'ouverture d'un journal télévisé. Et ce n'est pas un rédacteur en chef qui l'a décidé : ce sont les barreaux du dessus.</p>
+  <p>Ironie : Simon Kuznets, qui a construit les comptes nationaux américains et le PIB dans les années 30, avait prévenu dans son rapport qu'on ne peut pas déduire le bien-être d'une nation de son revenu national. Il a été ignoré.</p>
+</div>
+<figure>
+  <svg viewBox="0 0 640 280" role="img" aria-label="Un immense panneau lumineux affiche le prix de l'essence, et une minuscule note de bas de page indique le coût réel">
+    <g class="rough">
+      <path class="sf" d="M90 30H430V170H90Z"/>
+      <path class="s" d="M200 170V240M320 170V240"/>
+      <path class="s" d="M0 242H640"/>
+      <path class="s sr thin" d="M80 20l-14-10M440 20l14-10M80 180l-14 10M440 180l14 10"/>
+      <use href="#guy" class="guy" x="520" y="208" width="20" height="36"/>
+      <path class="s thin" d="M526 216L506 228"/>
+    </g>
+    <text class="tm" x="260" y="62" text-anchor="middle">PRIX DU GALLON</text>
+    <text class="t tr" x="260" y="150" text-anchor="middle" style="font-size:86px">3.99</text>
+    <text class="tm" x="500" y="236" text-anchor="end" style="font-size:11px">*coût réel, voir annexe p. 847</text>
+  </svg>
+  <figcaption>Le prix est affiché en néon, en chiffres de plusieurs pieds de haut, mis à jour plusieurs fois par jour. Le coût élargi n'apparaît qu'en astérisque dans des annexes que personne ne lit. (Le prix est inventé, c'est un dessin.)</figcaption>
+</figure>
+<div class="flow">
+  <p>Les mêmes économistes avaient un nom pour l'autre moitié du problème : <mark>l'ignorance rationnelle</mark>. Ton vote ne décide presque jamais rien, donc s'informer en profondeur coûte plus que ce que ça rapporte. Rester mal informé est le choix rationnel.</p>
+  <p>Résultat, l'information échoue deux fois : elle est filtrée côté offre par les incitations, et personne n'en veut côté demande. <strong>Même une information vraie, soignée et bien communiquée n'arrive qu'ici, sur l'un des barreaux les plus bas.</strong> C'est la réponse à la question de départ.</p>
+</div>
+
+<!-- ===== 6 ===== -->
+<div class="rung-head" id="r6"><span class="rung-num">6</span><h2>Événements &amp; comportements</h2></div>
+<div class="flow" style="margin-top:18px">
+  <p>Les infos du jour, les élections, la bourse, les conflits, les lancements de produits, les cycles d'indignation. <mark>Presque toute notre attention vit ici</mark>, et ce barreau est conçu pour la recapturer chaque matin.</p>
+  <p>Nate avait dessiné un jour comment notre société hiérarchise ses priorités : IA, armée, monnaie, obligations, énergie, bien-être des citoyens, santé de l'environnement, à peu près dans cet ordre. Il trouvait ça juste et terrible à la fois. Aujourd'hui il comprend : ce classement n'est la décision d'aucun méchant. C'est la sortie des cinq barreaux du dessus, réimprimée chaque matin.</p>
+</div>
+<figure>
+  <svg viewBox="0 0 640 230" role="img" aria-label="Un bonhomme au volant tourne la clé en pensant choisir, derrière lui l'ombre de l'échelle a déjà tout décidé">
+    <g class="rough">
+      <path class="s dash thin" style="opacity:.6" d="M40 20V200M140 20V200M40 40H140M40 80H140M40 120H140M40 160H140"/>
+      <path class="sf" d="M220 170V130L260 96H380L420 130H500V170Z"/>
+      <circle class="sf" cx="270" cy="176" r="18"/><circle class="sf" cx="450" cy="176" r="18"/>
+      <path class="s" d="M268 104H372L396 130H244Z"/>
+      <use href="#guy" class="guy" x="300" y="92" width="26" height="46"/>
+      <path class="s" d="M0 194H640"/>
+      <path class="sf" d="M420 30H600Q610 30 610 40V70Q610 80 600 80H440L416 96L424 80H420Q410 80 410 70V40Q410 30 420 30Z"/>
+    </g>
+    <text class="t" x="510" y="61" text-anchor="middle">Allez, je choisis…</text>
+    <text class="tm" x="90" y="222" text-anchor="middle">déjà décidé</text>
+  </svg>
+  <figcaption>Le trajet domicile-travail et le vote ont été façonnés des barreaux plus haut : l'urbanisme, la fiscalité, le prix à la pompe, le pickup dans l'allée. Quand on tourne la clé, l'essentiel du choix est déjà fait.</figcaption>
+</figure>
+
+<hr>
+<h2>Le piège</h2>
+<div class="flow" style="margin-top:18px">
+  <p>Superposez les deux flèches de l'échelle. <mark>Les barreaux les plus faciles et rapides à toucher sont ceux qui comptent le moins. Ceux qui comptent le plus bougent le plus lentement.</mark></p>
+  <p>Et l'économie de l'attention aggrave le piège : le barreau du bas est rafraîchi en permanence pour retenir nos yeux, alors que personne ne gagne d'argent à travailler sur le barreau du haut.</p>
+</div>
+<figure>
+  <svg viewBox="0 0 640 300" role="img" aria-label="Graphique qualitatif : l'attention est maximale sur les barreaux du bas, le levier est maximal sur les barreaux du haut, les deux courbes se croisent">
+    <g class="rough">
+      <path class="s" d="M70 30V240H610"/>
+      <path class="s sr" style="stroke-width:4" d="M90 50C200 80 300 190 590 225"/>
+      <path class="s sg" style="stroke-width:4" d="M90 225C300 210 420 90 590 50"/>
+      <circle class="s" cx="110" cy="60" r="30"/>
+    </g>
+    <text class="t" x="96" y="268" text-anchor="middle">6 · Événements</text>
+    <text class="t" x="340" y="268" text-anchor="middle">← on monte l'échelle →</text>
+    <text class="t" x="584" y="268" text-anchor="middle">1 · Vision</text>
+    <text class="t tr" x="210" y="62">notre attention</text>
+    <text class="t tg" x="440" y="78">le levier</text>
+    <text class="tm" x="110" y="112" text-anchor="middle">on est tous ici</text>
+    <text class="tm" x="40" y="140" text-anchor="middle" transform="rotate(-90 40 140)">beaucoup</text>
+  </svg>
+  <figcaption>Dessin qualitatif, sans chiffres : notre attention est saturée exactement là où le levier est le plus faible. Ça rejoint les points de levier de Donella Meadows et le modèle de l'iceberg (événements en surface, structures et modèles mentaux en dessous).</figcaption>
+</figure>
+<p>Conclusion évidente, donc : il faut travailler en haut, changer la vision du monde. Sauf que…</p>
+
+<!-- ===== 7 ===== -->
+<div class="rung-head" id="r7"><span class="rung-num">7</span><h2>Le barreau caché : la biologie</h2></div>
+<div class="flow" style="margin-top:18px">
+  <p>Au-dessus de la vision du monde, il y avait un barreau depuis le début, invisible : <mark>la biologie</mark>. Des circuits de récompense anciens. La dopamine réglée sur la nouveauté. Le statut relatif qui compte plus que le bien-être absolu. Un futur fortement escompté. Et la tendance de tout organisme à utiliser l'énergie disponible.</p>
+  <p>Ce barreau a une différence avec tous les autres : <strong>on ne peut pas le changer</strong>. Le génome humain ne bouge pas avec une nouvelle loi ou un nouvel élu. Et il touche directement chaque barreau du dessous : c'est pour ça que le statut est si tenace, que l'escompte politique est si fort, que notre attention se fait si facilement capturer, que « plus » bat toujours « assez ».</p>
+  <p>Mais il y a un rebondissement, via l'anthropologue Christopher Boehm : la biologie est fixe, pas sa manière de s'exprimer. On porte l'instinct de grimper en statut, <em>et aussi</em> un instinct anti-domination, celui qui a permis à nos ancêtres de tenir en respect les apprentis mâles alpha pendant des centaines de milliers d'années.</p>
+</div>
+<figure>
+  <svg viewBox="0 0 640 270" role="img" aria-label="Un bonhomme couronné sur un piédestal se fait tirer vers le bas par une coalition de petits bonshommes avec une corde">
+    <g class="rough">
+      <path class="sf" d="M130 150H230V230H130Z"/>
+      <use href="#guyup" class="guy" x="152" y="70" width="44" height="80"/>
+      <path class="s" style="fill:var(--hl)" d="M160 72L164 56L172 66L174 52L180 66L188 56L190 72Z"/>
+      <path class="s" d="M0 232H640"/>
+      <path class="s" d="M190 104Q330 150 520 186"/>
+      <use href="#guypullL" class="guy-b" x="330" y="160" width="40" height="72"/>
+      <use href="#guypullL" class="guy-b" x="390" y="160" width="40" height="72"/>
+      <use href="#guypullL" class="guy-b" x="450" y="160" width="40" height="72"/>
+      <use href="#guypullL" class="guy-b" x="510" y="160" width="40" height="72"/>
+    </g>
+    <text class="t" x="180" y="40" text-anchor="middle">programme 1 : grimper</text>
+    <text class="t tb" x="440" y="140" text-anchor="middle">programme 2 : « redescends, toi »</text>
+  </svg>
+  <figcaption>Les deux programmes sont en chacun de nous. Lequel s'exprime, ce sont les barreaux du dessous qui le décident.</figcaption>
+</figure>
+
+<div class="aside">
+  <b>Échos : deux autres auteurs qui ont vu ce barreau</b>
+  <div class="flow" style="gap:12px">
+    <p><strong>Yuval Noah Harari, <em>Sapiens</em>.</strong> Notre biologie n'a presque pas bougé depuis la savane. Ce qui a changé, c'est la culture : des fictions partagées (l'argent, les nations, les entreprises) qui permettent à des millions d'inconnus de coopérer. Sa formule résume la conclusion de Nate : la biologie permet, la culture interdit ou redirige.</p>
+    <p><strong>Tim Urban, Wait But Why et <em>What's Our Problem?</em></strong> Urban oppose le « cerveau primitif », réglé pour survivre dans la tribu, au « cerveau supérieur », capable de raisonner. Dans son livre, il construit lui aussi une échelle, <em>The Ladder</em>, de la pensée tribale en bas à la pensée rationnelle en haut. La différence : son échelle décrit comment on pense, celle de Nate décrit ce qui pousse le système.</p>
+    <p style="color:var(--muted);font-size:16px">Ces rapprochements sont un ajout à l'épisode, Nate ne cite ni Harari ni Urban.</p>
+  </div>
+</div>
+
+<hr>
+<h2>Donc, où pousser ?</h2>
+<div class="flow" style="margin-top:18px">
+  <p>C'est l'amendement de Nate aux points de levier de Meadows : changer la nature humaine est hors de portée, alors <mark>le levier le plus haut qu'on puisse réellement actionner, c'est rediriger la nature humaine</mark>. Viser autre chose avec la même pulsion de statut.</p>
+  <p>Et en redescendant l'échelle, ça veut dire que <strong>le barreau pivot de notre époque était sans doute le n° 2, valeurs et signaux de statut</strong>, depuis le début.</p>
+</div>
+<figure>
+  <svg viewBox="0 0 640 250" role="img" aria-label="Un archer bonhomme détourne son arc d'une cible barrée marquée consommation vers une nouvelle cible marquée ?">
+    <g class="rough">
+      <use href="#guy" class="guy" x="290" y="130" width="44" height="80"/>
+      <path class="s" d="M330 130Q350 154 330 178M330 130L330 178"/>
+      <!-- cible gauche -->
+      <circle class="sf" cx="90" cy="120" r="44"/><circle class="s" cx="90" cy="120" r="26"/><circle class="s" cx="90" cy="120" r="8"/>
+      <path class="s sr" style="stroke-width:4" d="M48 78L132 162M132 78L48 162"/>
+      <!-- cible droite -->
+      <circle class="sf" cx="550" cy="110" r="44"/><circle class="s sg" cx="550" cy="110" r="26"/><circle class="s sg" cx="550" cy="110" r="8"/>
+      <path class="s dash" d="M346 154Q440 100 500 112"/>
+      <path class="s" d="M0 212H640"/>
+    </g>
+    <text class="t" x="90" y="196" text-anchor="middle">consommation, bling</text>
+    <text class="t tg" x="550" y="186" text-anchor="middle">un nouveau tableau</text>
+    <text class="t tg" x="550" y="206" text-anchor="middle">des scores</text>
+    <text class="t" x="312" y="236" text-anchor="middle">même pulsion, autre cible</text>
+  </svg>
+  <figcaption>Les pieds bandés et la cigarette montrent à quoi ressemble une redirection réussie : les pulsions n'ont pas changé, le tableau des scores, si.</figcaption>
+</figure>
+
+<hr>
+<h2>L'outil à garder dans sa poche</h2>
+<div class="flow" style="margin-top:18px">
+  <p>Devant n'importe quel article, argument, organisation ou projet, une seule question :</p>
+  <p class="big"><mark>Sur quel barreau ça agit,<br>et lequel ça essaie de changer ?</mark></p>
+  <p>Nate s'en sert pour cartographier son propre podcast :</p>
+  <dl class="map">
+    <dt>1 · Vision</dt><dd>la cécité énergétique, son thème central</dd>
+    <dt>2 · Statut</dt><dd>les épisodes sur la sélection sexuelle et le statut</dd>
+    <dt>3–4 · Règles, incitations</dt><dd>les économistes qu'il invite</dd>
+    <dt>5 · Information</dt><dd>beaucoup d'épisodes, par nature</dd>
+    <dt>6 · Événements</dt><dd>la géopolitique au jour le jour qu'on lui réclame, et qu'il fait peu : plus d'info ne suffira pas</dd>
+  </dl>
+  <p class="big" style="margin-top:12px">Le levier est en amont.<br>L'attention est en aval.<br>Tout le travail, c'est cet écart.</p>
+</div>
+
+<hr>
+<h2>Références</h2>
+<div class="flow" style="margin-top:18px">
+  <h3>La source</h3>
+  <ul class="refs">
+    <li><strong>Nate Hagens</strong>, « 7 Rungs of a Runaway System: How Civilization Descended Into Crisis », <em>The Great Simplification</em>, Frankly #162. <a href="https://www.youtube.com/watch?v=1_iUUeXtZk0">Vidéo YouTube</a> · <a href="https://www.thegreatsimplification.com/">Site du podcast</a></li>
+  </ul>
+  <h3>Cités par Nate dans l'épisode</h3>
+  <ul class="refs">
+    <li><strong>James Buchanan &amp; Gordon Tullock</strong>, <em>The Calculus of Consent</em> (1962). Choix public : électeurs, fonctionnaires et consommateurs sont la même créature. Barreaux 3 à 5.</li>
+    <li><strong>Donella Meadows</strong>, <a href="https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/">« Leverage Points: Places to Intervene in a System »</a>. La flèche « levier » de l'échelle.</li>
+    <li><strong>Simon Kuznets</strong>, rapport au Congrès américain sur le revenu national (années 1930). L'avertissement ignoré sur le PIB. Barreau 5.</li>
+    <li><strong>Christopher Boehm</strong>, anthropologue, sur l'instinct anti-domination des groupes humains. Barreau 7.</li>
+    <li><strong>Johan Rockström</strong>, les limites planétaires. Barreau 5.</li>
+    <li><strong>Greg Elliot</strong>, invité du podcast : si notre système économique était une personne, il aurait beaucoup de traits d'un psychopathe.</li>
+  </ul>
+  <h3>Ajoutés ici</h3>
+  <ul class="refs">
+    <li><strong>Yuval Noah Harari</strong>, <em>Sapiens : une brève histoire de l'humanité</em>. Barreaux 1 et 7.</li>
+    <li><strong>Tim Urban</strong>, <a href="https://waitbutwhy.com/">Wait But Why</a> et <em>What's Our Problem? A Self-Help Book for Societies</em> (2023). Barreau 7, et le style des dessins.</li>
+  </ul>
+  <p class="sources">Synthèse et dessins : interprétation libre en français, faite à partir du transcript complet de l'épisode.</p>
+</div>
+</main>
+
+</body>
+</html>
