@@ -1,6 +1,6 @@
 # blog.pypinho.fr
 
-Site statique servi par Coolify (nginx) sur le VPS. **Chaque push sur `main` redéploie le site automatiquement.**
+Site statique servi par Coolify (nginx, app log, uuid ya1qnoylop0maitbrw5buswf) sur le VPS. **Chaque push sur `main` redéploie le site automatiquement.**
 
 ## Structure
 
